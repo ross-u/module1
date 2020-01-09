@@ -47,7 +47,9 @@ body {
 .group1 {
   display: flex;
   align-items: center;
+  margin-top: 5em;
 }
+
 .group1 img.phones {
   width: 20em;
   margin-right: 3em;
@@ -184,11 +186,12 @@ main:before {
 
 footer {
   text-align: center;
-  margin-top: 2em;
+  /* margin-top: 2em; */
 }
 
 footer a {
   margin-right: 1em;
   text-transform: uppercase;
   font-size: 80%;
+  font-weight: bold;
 }
