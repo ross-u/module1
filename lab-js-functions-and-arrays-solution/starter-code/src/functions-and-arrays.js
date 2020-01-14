@@ -77,21 +77,21 @@ const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 
 // we will do the same as before, create a generic function that can be reused no matter what kind of array we work with
 
-function avg(arr) {
-  if (!arr) return null;
+function averageNumbers(arr) {
+  if (!arr.length) return null;
   else return sumArray(arr) / arr.length;
 }
 
 // instead if (!arr) return null, we can do the following:
 
-// function avg(arr) {
+// function averageNumbers(arr) {
 //   return sumArray(arr) / arr.length || null;
 // };
 
 // the same as above
-// const avg = arr => !arr ? null : sumArray(arr) / arr.length;
+// const averageNumbers = arr => !arr ? null : sumArray(arr) / arr.length;
 
-// avg(numbersAvg)
+// averageNumbers(numbersAvg)
 
 // Level 2: Array of Strings
 const wordsArr = [
@@ -118,12 +118,12 @@ const wordsArr = [
 // };
 
 // the other way doing the same as above:
-// const averageWordLength = words => {
-//   if (!words.length) return null;
-//   return words.join('').length / words.length;
-// };
+const averageWordLength = words => {
+  if (!words.length) return null;
+  return words.join('').length / words.length;
+};
 
-// averageNumbers(wordsArr)
+// averageWordLength(wordsArr);
 
 // -------- Iteration #5: Unique arrays --------
 const wordsUnique = [

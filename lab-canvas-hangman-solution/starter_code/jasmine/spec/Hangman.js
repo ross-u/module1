@@ -8,7 +8,7 @@ describe('Hangman Game', function () {
       expect(hangman.words).toBeDefined();
     });
     it('There should be at least one word to pick', function () {
-      expect(hangman.words.length).toBeGreaterThan(2);
+      expect(hangman.words.length).toBeGreaterThan(0);
     });
   });
 
@@ -36,13 +36,13 @@ describe('Hangman Game', function () {
     });
 
     it('checkIfLetter should receive a number', function () {
-      expect(typeof (hangman.checkIfLetter)).toBe('function');
-    });
-
-    it('checkIfLetter should return a boolean', function () {
       var keyCode = 43;
       hangman.checkIfLetter(keyCode);
       expect(typeof (keyCode)).toBe('number');
+    });
+
+    it('checkIfLetter should return a boolean', function () {
+      expect(typeof (hangman.checkIfLetter())).toBe('boolean');
     });
 
     it('checkIfLetter should return false', function () {
@@ -58,11 +58,13 @@ describe('Hangman Game', function () {
     it('checkClickedLetters should be a function', function () {
       expect(typeof (hangman.checkClickedLetters)).toBe('function');
     });
+
     it('checkClickedLetters should receive a string', function () {
       var key = 'P';
       hangman.checkClickedLetters(key);
       expect(typeof (key)).toBe('string');
     });
+
     it('checkClickedLetters should return a boolean', function () {
       hangman.letters.push('I');
       expect(typeof (hangman.checkIfLetter('N'))).toBe('boolean');
@@ -73,7 +75,7 @@ describe('Hangman Game', function () {
       expect(hangman.checkClickedLetters('F')).toEqual(true);
     });
 
-    it('checkIfLetter should return false', function () {
+    it('checkClickedLetters should return false', function () {
       hangman.letters.push('I', 'R', 'P');
       expect(hangman.checkClickedLetters('R')).toEqual(false);
     });
@@ -83,11 +85,13 @@ describe('Hangman Game', function () {
     it('addCorrectLetter should be a function', function () {
       expect(typeof (hangman.addCorrectLetter)).toBe('function');
     });
-    it('addCorrectLetter should receive a number', function () {
+
+    it('addCorrectLetter should receive a string', function () {
       var key = 'N';
       hangman.checkClickedLetters(key);
       expect(typeof (key)).toBe('string');
     });
+
     it('addCorrectLetter should add letters to guessedLetter string', function () {
       hangman.secretWord = 'Ironhack';
       hangman.addCorrectLetter(1);
@@ -99,11 +103,13 @@ describe('Hangman Game', function () {
     it('addWrongLetter should be a function', function () {
       expect(typeof (hangman.addWrongLetter)).toBe('function');
     });
+
     it('addWrongLetter should receive a string', function () {
       var letter = 'P';
       hangman.addWrongLetter(letter);
       expect(typeof (letter)).toBe('string');
     });
+
     it('addWrongLetter should discount the amount of errors left', function () {
       hangman.errorsLeft = 7;
       hangman.addWrongLetter('P');
@@ -115,16 +121,19 @@ describe('Hangman Game', function () {
     it('checkGameOver should be a function', function () {
       expect(typeof (hangman.checkGameOver)).toBe('function');
     });
+
     it('checkGameOver should return a boolean', function () {
       expect(typeof (hangman.checkGameOver())).toBe('boolean');
     });
-    it('checkGameOver should return false if the errorsLeft is 0', function () {
-      hangman.errorsLeft = 0;
-      expect(hangman.checkGameOver()).toEqual(true);
-    });
-    it('checkGameOver should return false if the errorsLeft is 0', function () {
+
+    it('checkGameOver should return false if the errorsLeft is greater than 0', function () {
       hangman.errorsLeft = 5;
       expect(hangman.checkGameOver()).toEqual(false);
+    });
+
+    it('checkGameOver should return true if the errorsLeft is 0', function () {
+      hangman.errorsLeft = 0;
+      expect(hangman.checkGameOver()).toEqual(true);
     });
   });
 
@@ -132,18 +141,21 @@ describe('Hangman Game', function () {
     it('checkWinner should be a function', function () {
       expect(typeof (hangman.checkWinner)).toBe('function');
     });
+
     it('checkWinner should return a boolean', function () {
       expect(typeof (hangman.checkWinner())).toBe('boolean');
     });
+
+    it('checkWinner should return false if we don\'t guess all letters', function () {
+      hangman.secretWord = 'IRONHACK';
+      hangman.guessedLetter = 'KHARCN';
+      expect(hangman.checkWinner()).toEqual(false);
+    });
+
     it('checkWinner should return true if we guess all letters', function () {
       hangman.secretWord = 'IRONHACK';
       hangman.guessedLetter = 'KHARCNIO';
       expect(hangman.checkWinner()).toEqual(true);
-    });
-    it('checkWinner should return true if we guess all letters', function () {
-      hangman.secretWord = 'IRONHACK';
-      hangman.guessedLetter = 'KHARCN';
-      expect(hangman.checkWinner()).toEqual(false);
     });
   });
 });

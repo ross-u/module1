@@ -1,42 +1,17 @@
-var hangman;
+let hangman;
 
 class Hangman {
   constructor() {
-    this.words = ['hello']; 
+    this.words = ['hello', 'ironhacker']; 
     this.secretWord = this.getWord(); 
     this.letters = [];
-    this.guessedLetters = [];
+    this.guessedLetters = '';
     this.errorsLeft = 10;
   }
+
   getWord () {
     let randomIndex = Math.floor(Math.random() * this.words.length);
-
-    return this.words[randomIndex].split('');
-  };
-
-  checkClickedLetter(letter) {
-    if(this.secretWord.includes(letter)) { // if the letter includes in my word
-      if(this.letters.includes(letter)) { // if the letter includes in the letters already clicked
-        console.log("letter already clicked"); // here you can alert
-
-        this.errorsLeft--
-        drawHangman(this.errorsLeft);
-        this.checkIfLoose();
-      } else { 
-        console.log("new letter and correct letter") 
-        this.pushLetters(letter);        
-        this.letters.push(letter); 
-        drawCorrectLetters(letter);
-        this.checkIfWin()
-      }
-    } else {
-      this.errorsLeft--
-      this.letters.push(letter);
-      drawHangman(this.errorsLeft);
-      this.checkIfLoose();
-    }
-    console.log(this.errorsLeft)
-    drawAllLetters(this.letters);
+    return this.words[randomIndex];
   }
 
   initializeGame() {
@@ -44,40 +19,75 @@ class Hangman {
     drawCharacters(this.secretWord, this.secretWord.length);
   }
 
+  checkIfLetter(key, keyCode) {
+    if(keyCode > 64 && keyCode < 91) {
+      this.checkClickedLetters(key);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkClickedLetters(letter) {
+    // console.log('TYPEOF LETTER', typeof letter);
+    if(this.letters.includes(letter)) { // if the letter is included in the letters already clicked
+      console.log("letter already clicked"); // here you can alert
+      return false;
+    } else {
+      if(this.secretWord.includes(letter)) { // if the letter was not already clicked and is included in the secret word
+        // console.log("new letter and correct letter") 
+        this.addCorrectLetter(letter);       
+        this.checkWinner();
+      } else {
+        // console.log("new letter but incorrect letter") 
+        this.addWrongLetter(letter)
+        // console.log(this.errorsLeft)
+        this.checkGameOver();
+      }
+    }
+  }
+
+  checkWinner() {
+    if(this.guessedLetter.length === this.secretWord.length) {
+      drawWinImg();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkGameOver() {
+    if(this.errorsLeft === 0) {
+      drawLooseImg();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  addCorrectLetter(letter) {
+    this.letters.push(letter);
+    this.guessedLetters += letter;
+    drawCorrectLetters(letter);
+  }
+
+  addWrongLetter(letter) {
+    this.letters.push(letter);
+    this.errorsLeft--;
+    drawHangman(this.errorsLeft);
+    drawAllLetters(this.letters);
+  }
+
   returnIndexPositions(letter) {
     const indexes = [];
-
     for(let i = 0; i < this.secretWord.length; i++) {
       if(this.secretWord[i] === letter) {
         indexes.push(i);
       }
     }
-
     return indexes;
   }
-
-  pushLetters(letter) {
-    const indexes = this.returnIndexPositions(letter);
-    for(let i = 0; i < indexes.length; i++) {
-      this.guessedLetters[indexes[i]] = letter
-      // this.guessedLetters.splice(indexes[i], 0, letter)
-    }
-  }
-
-  checkIfWin() {
-    if(this.secretWord.join('') === this.guessedLetters.join('')) {
-      drawWinImg()
-    }
-  }
-
-  checkIfLoose() {
-    if(this.errorsLeft === 0) {
-      drawLooseImg();
-      return;
-    }
-  }
 }
-
 
 document.getElementById('start-game-button').onclick = function () {
   hangman = new Hangman();
@@ -86,9 +96,7 @@ document.getElementById('start-game-button').onclick = function () {
 };
 
 document.onkeydown = function (e) {
-  const letter = e.key;
-
-  if(e.keyCode > 64 && e.keyCode < 91) {
-    hangman.checkClickedLetter(letter);
-  }
+  let key = e.key;
+  let keyCode = e.keyCode;
+  hangman.checkIfLetter(key, keyCode);
 };
