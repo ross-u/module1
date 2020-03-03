@@ -16,7 +16,9 @@ These are our milestones:
 
 Let's do it!
 
-![](https://media.giphy.com/media/xT8qAZcty5f0BEm2lO/giphy.gif)
+<!-- ![](https://media.giphy.com/media/xT8qAZcty5f0BEm2lO/giphy.gif) -->
+
+To check how your final version should look like check this **[demo](https://sandrabosk.github.io/demo-chrono/index.html)**.
 
 ## Requirements
 
