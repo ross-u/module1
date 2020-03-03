@@ -5,8 +5,7 @@ const warningBottomQueue = document.querySelector('#queue-container .warning-bot
 const addQueue = document.querySelector('.btn-add-queue');
 const dequeue = document.querySelector('.btn-take-dequeue');
 
-const sizeStructure = 10;
-const queue = new QueueDataStructure(sizeStructure);
+const queue = new QueueDataStructure();
 
 const clearQueueInput = () => {
   queueInput.value = '';
@@ -17,7 +16,7 @@ const generateListQueue = () => {
   warningBottomQueue.style.display = 'none';
   queueUL.innerHTML = '';
   let length = queue.display().length;
-  let size = sizeStructure - length;
+  let size = queue.MAX_SIZE - length;
   queue.display().forEach(item => {
     let li = document.createElement('li');
     li.className = 'active';

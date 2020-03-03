@@ -6,8 +6,7 @@ const warningBottomStack = document.querySelector('#stack-container .warning-bot
 const addStackBtn = document.getElementById('add-stack');
 const takeStackBtn = document.getElementById('take-stack');
 
-const stackSize = 10;
-const newStack = new StackDataStructure(stackSize);
+const newStack = new StackDataStructure();
 
 const clearStackInput = () => {
   stackInput.value = '';
@@ -18,7 +17,7 @@ const renderListStack = () => {
   warningBottomStack.style.display = 'none';
   stackList.innerHTML = '';
   let length = newStack.display().length;
-  let size = stackSize - length;
+  let size = newStack.MAX_SIZE - length;
   newStack.display().forEach(item => {
     let li = document.createElement('li');
     li.className = 'active';

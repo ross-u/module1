@@ -1,7 +1,7 @@
 class StackDataStructure {
-  constructor(size) {
+  constructor() {
     this.stackControl = [];
-    this.MAX_SIZE = size;
+    this.MAX_SIZE = 10;
   }
 
   canPush() {

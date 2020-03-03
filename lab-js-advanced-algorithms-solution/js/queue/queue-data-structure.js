@@ -1,7 +1,7 @@
 class QueueDataStructure {
-  constructor(size) {
+  constructor() {
     this.queueControl = [];
-    this.MAX_SIZE = size;
+    this.MAX_SIZE = 10;
   }
 
   display() {
