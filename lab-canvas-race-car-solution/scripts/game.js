@@ -30,7 +30,7 @@ class Game {
             this.drawBackground();
             this.drawMainCharacters();
             this.car.move();
-            for (let i = 0; i < this.obstacles.length; obstacles++) {
+            for (let i = 0; i < this.obstacles.length; i++) {
                 this.obstacles[i].move();
                 this.obstacles[i].draw();
                 this.car.crashCollision(this.obstacles[i]);
