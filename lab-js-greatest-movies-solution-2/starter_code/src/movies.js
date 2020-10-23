@@ -90,6 +90,12 @@ function orderAlphabetically(moviesArr) {
   const moviesArrCopy = [...moviesArr];
   return moviesArrCopy
     .sort(function (a, b) {
+    
+    
+  // if 1 returned: b is sorted before a
+  // if -1 returned: a stays before b (leave a and b unchanged)
+  // if 0 returned: a stays before b (leave a and b unchanged)
+    
       if (a.title > b.title) {
         return 1;
       } else if (a.title < b.title) {
