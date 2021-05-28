@@ -1,109 +1,122 @@
-// starter-code/js/index.js
+// ITERATION 1
 
-var $cart = document.querySelector('#cart tbody');
+function updateSubtotal(product) {
+  console.log('Calculating subtotal, yey!');
+  // Get DOM elements that hold price and quantity
+  const price = product.querySelector('.price span');
+  const quantity = product.querySelector('.quantity input');
 
-//
-// Calc
-//
+  // Extract values from DOM elements
+  const priceValue = parseFloat(price.innerText);
+  const quantityValue = quantity.valueAsNumber;
 
-var $calc = document.getElementById('calc');
+  // Calculate total values
+  const subtotalValue = priceValue * quantityValue;
 
-//
-// Iteration 1
-//
+  // Get DOM element that holds the subtotal value for the product
+  const subTotal = product.querySelector('.subtotal span');
 
-function updateSubtot($product) {
-  var $subtot = $product.querySelector('.subtot span');
-  var $pu = $product.querySelector('.pu span');
-  var $qty = $product.querySelector('.qty input');
+  // Set the product subtotal to the corresponding DOM element
+  subTotal.innerText = subtotalValue;
 
-  var pu = Number($pu.textContent);
-  var qty = Number($qty.value) || 0;
-  var subtot = pu*qty;
-  
-  $subtot.textContent = subtot; // update the product's subtotal
-
-  return subtot;
+  // Return subtotal value so it can be used later
+  return subtotalValue;
 }
 
-var $bigtotal = document.querySelector('h2 span');
+function calculateAll() {
+  // code in the following two lines is added just for testing purposes.
+  // it runs when only iteration 1 is completed. at later point, it can be removed.
+  // const singleProduct = document.querySelector('.product');
+  // updateSubtotal(singleProduct);
+  // end of test
 
-function calcAll() {
-  var sum = 0;
+  // ITERATION 2
+  //... your code goes here
 
-  //
-  // Iteration 2
-  //
+  // Get the DOM nodes for each product row
+  const products = document.getElementsByClassName('product');
 
-  var $products = [...document.querySelectorAll('.product')]; // find all the products
-  $products.forEach(function ($product) {
-    var subtot = updateSubtot($product);
+  // Declare an auxiliary variable that will hold the sum of each product subtotal
+  let totalValue = 0;
 
-    sum += subtot;
-  });
+  // Iterate through the product nodes,
+  // call update subtotal on it and add the subtotal to the total value
+  for (let product of products) {
+    totalValue += updateSubtotal(product);
+  }
 
-  // Iteration 3 : update the total with `sum`
-  $bigtotal.textContent = sum;
+  // ITERATION 3
+  //... your code goes here
+  // Display the total value of products in cart in the appropriate node
+  document.querySelector('#total-value span').innerHTML = totalValue;
 }
 
-$calc.onclick = calcAll;
+// ITERATION 4
 
-//
-// Iteration 4
-//
+function removeProduct(event) {
+  const target = event.currentTarget;
+  console.log('The target in remove is:', target);
+  // ...
+  const row = target.parentNode.parentNode;
+  //   console.log('row: ', row);
+  const parent = row.parentNode;
+  //   console.log('parent: ', parent);
+  parent.removeChild(row);
 
-var $deleteButtons = [...document.querySelectorAll('.btn-delete')];
-
-function bindDeleteButton($deleteButton) {
-  $deleteButton.onclick = function (e) {
-    // delete the product
-    var $product = e.currentTarget.parentNode.parentNode; // product tr
-    $cart.removeChild($product);
-
-    calcAll(); // once deleted, recalc all
-  };
+  calculateAll();
 }
-$deleteButtons.forEach(bindDeleteButton);
 
-//
-// Iteration 5
-//
+// ITERATION 5
 
-var $createButton = document.getElementById('create');
-$createButton.onclick = function () {
-  var $name = document.querySelector('.new input[type="text"]');
-  var $pu = document.querySelector('.new input[type="number"]');
+function createProduct(event) {
+  const createRow = document.querySelector('.create-product');
+  let newProdNameInput = createRow.querySelector('input');
+  let newProdNameValue = newProdNameInput.value;
+  let newProdPriceInput = createRow.querySelector("input[type='number']");
+  let newProdPriceValue = Number(newProdPriceInput.valueAsNumber).toFixed(2);
 
-  var $tr = document.createElement('tr');
-  $tr.className = 'product';
-  $tr.innerHTML = `
+  const newTableRow = document.createElement('tr');
+  newTableRow.className = 'product';
+  newTableRow.innerHTML = `
     <td class="name">
-      <span>${$name.value}</span>
+      <span>${newProdNameValue}</span>
     </td>
-
-    <td class="pu">
-      $<span>${$pu.value}</span>
+    <td class="price">$<span>${newProdPriceValue}</span></td>
+    <td class="quantity">
+      <input type="number" value="0" min="0" placeholder="Quantity" />
     </td>
-
-    <td class="qty">
-      <label>
-        <input type="number" value="0" min="0">
-      </label>
-    </td>
-
-    <td class="subtot">
-      $<span>0</span>
-    </td>
-
-    <td class="rm">
-      <button class="btn btn-delete">delete</button>
+    <td class="subtotal">$<span>0</span></td>
+    <td class="action">
+      <button class="btn btn-remove">Remove</>
     </td>
   `;
-  $cart.appendChild($tr);
 
-  // don't forget to bind the .onclick handler
-  bindDeleteButton($tr.querySelector('.btn-delete'));
+  // get the parent of this newly created row
+  const parent = document.querySelector('#cart tbody');
 
-  $name.value = '';
-  $pu.value = '';
-};
+  // append the newly created row to the parent
+  parent.appendChild(newTableRow);
+
+  // make sure remove button inherits the same behavior as other remove buttons
+  const removeBtn = newTableRow.querySelector('.btn-remove');
+  removeBtn.addEventListener('click', removeProduct);
+
+  // clean the fields
+  newProdNameInput.value = '';
+  newProdPriceInput.value = 0;
+}
+
+window.addEventListener('load', () => {
+  const calculatePricesBtn = document.getElementById('calculate');
+  calculatePricesBtn.addEventListener('click', calculateAll);
+
+  const removeBtns = document.querySelectorAll('.btn-remove');
+  for (let removeBtn of removeBtns) {
+    removeBtn.addEventListener('click', removeProduct);
+  }
+
+  const createBtn = document.getElementById('create');
+  if (createBtn) {
+    createBtn.addEventListener('click', createProduct);
+  }
+});

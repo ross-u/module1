@@ -1,0 +1,620 @@
+*,
+:before,
+:after {
+  box-sizing: border-box;
+}
+
+:root {
+  --pad: 1em;
+  --gutter: 1.5em;
+}
+@media (min-width: 900px) {
+  :root {
+    --pad: 4em;
+  }
+}
+
+body {
+  margin: 0;
+
+  font-family: "Lato", sans-serif;
+  line-height: 1.5;
+
+  -webkit-font-smoothing: antialiased;
+
+  background: #f5f5eb;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.h {
+  font-family: "Intro", sans-serif;
+  text-transform: uppercase;
+}
+
+.h2 {
+  text-align: center;
+  font-size: 190%;
+  color: #f07142;
+  margin-top: 1.7em;
+  margin-bottom: 2em;
+  line-height: 1.2;
+}
+
+.btn {
+  background: #f07142;
+  color: white;
+  font-weight: bold;
+  padding: 1em 1.25em;
+  border-radius: 0.35em;
+}
+button {
+  font: inherit;
+  border: 0;
+}
+
+/*
+ ######     ###    ########  ########  
+##    ##   ## ##   ##     ## ##     ## 
+##        ##   ##  ##     ## ##     ## 
+##       ##     ## ########  ##     ## 
+##       ######### ##   ##   ##     ## 
+##    ## ##     ## ##    ##  ##     ## 
+ ######  ##     ## ##     ## ########  
+*/
+
+.cards {
+}
+@media (min-width: 900px) {
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .card {
+    width: calc(25% - 3 * var(--gutter) / 4);
+  }
+}
+
+.card {
+  background: white;
+
+  margin-bottom: 2em;
+}
+
+.card {
+  border-radius: 0.5em;
+}
+.card .pic {
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+}
+
+.card .pic {
+  width: 100%;
+}
+
+.card .details {
+  padding: 1em;
+}
+
+.card .details .title {
+  font-weight: bold;
+}
+.card .details .subtitle {
+  color: gray;
+}
+
+.card .desc {
+  display: flex;
+  align-items: center;
+}
+.card .desc :last-child {
+  margin-left: auto;
+}
+
+.card .price {
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.card .btn {
+  padding: 0.5em 1em;
+  background: #5fb038;
+  color: white;
+  font-size: 80%;
+}
+
+.card .kudus {
+  padding: 1em;
+  border-top: 2px solid #dadada;
+}
+
+.card .kudus {
+  display: flex;
+}
+.card .kudus .stars {
+  margin-right: auto;
+}
+
+.card .stars img {
+  height: 1em;
+}
+
+/*
+##     ## ########    ###    ########  ######## ########  
+##     ## ##         ## ##   ##     ## ##       ##     ## 
+##     ## ##        ##   ##  ##     ## ##       ##     ## 
+######### ######   ##     ## ##     ## ######   ########  
+##     ## ##       ######### ##     ## ##       ##   ##   
+##     ## ##       ##     ## ##     ## ##       ##    ##  
+##     ## ######## ##     ## ########  ######## ##     ## 
+*/
+
+.header {
+  background: gray;
+}
+@media (min-width: 900px) {
+  /*
+  Make the header 100vh and the form get the available height
+  */
+  .header {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .form {
+    flex: 1;
+  }
+
+  /* vertical center things into .form */
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.masthead h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.masthead p {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 80%;
+}
+
+.navbar {
+  display: flex;
+  background: white;
+  padding: 1em var(--pad);
+}
+@media (min-width: 900px) {
+  .navbar {
+    align-items: center;
+  }
+}
+.navbar .menu {
+  margin-left: auto;
+}
+
+.navbar .menu img {
+  height: 2em;
+}
+
+.navbar .menu2 {
+  display: none;
+}
+@media (min-width: 900px) {
+  .navbar .menu {
+    display: none;
+  }
+  .navbar .menu2 {
+    display: initial;
+    margin-left: auto;
+  }
+  .navbar .menu2 a {
+    margin-right: 3em;
+  }
+}
+
+.form {
+  background: #c0da39 linear-gradient(180deg, rgba(192, 218, 57, 0) 0%, rgba(116, 204, 82, 1) 100%);
+
+  padding: 1em var(--pad);
+
+  margin-top: 50vh;
+}
+@media (min-width: 900px) {
+  .form {
+    margin-top: 0;
+    margin-left: 50vw;
+    padding: 0 5em;
+    font-size: 120%;
+  }
+}
+
+.form h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  color: white;
+  font-size: 230%;
+  line-height: 1.2;
+}
+
+.form form {
+  margin-top: 1em;
+}
+
+.form .field {
+  background: white;
+  padding: 1em;
+  padding-left: 4em;
+
+  background-image: url("../images/pin.svg");
+  background-position: 1.5em center;
+  background-repeat: no-repeat;
+  background-size: 1.5em;
+}
+
+.form .field:last-of-type {
+  background-image: url("../images/bbq.svg");
+}
+
+.form .field:first-of-type {
+  border-bottom: 2px solid #dadada;
+}
+
+.form .field:first-of-type {
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+}
+.form .field:last-of-type {
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+}
+
+.form label {
+  display: block;
+}
+
+.form label input {
+  border: 0;
+  font: inherit;
+  line-height: 2;
+  width: 100%;
+}
+
+.form .btn {
+  text-transform: uppercase;
+  font-family: "Intro", sans-serif;
+}
+
+/*
+##     ##  #######  ##      ## ########  #######  
+##     ## ##     ## ##  ##  ##    ##    ##     ## 
+##     ## ##     ## ##  ##  ##    ##    ##     ## 
+######### ##     ## ##  ##  ##    ##    ##     ## 
+##     ## ##     ## ##  ##  ##    ##    ##     ## 
+##     ## ##     ## ##  ##  ##    ##    ##     ## 
+##     ##  #######   ###  ###     ##     #######  
+*/
+
+.howto,
+.dishes,
+.cuisine,
+.ads,
+.highlighted,
+.footer {
+  overflow: hidden;
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
+
+.howto {
+  background: white;
+}
+
+.howto ol {
+  list-style: none;
+  padding-left: 0;
+}
+@media (min-width: 900px) {
+  .howto ol {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 3em;
+  }
+}
+
+.howto li {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 2.5em;
+}
+@media (min-width: 900px) {
+  .howto li {
+    width: 30%;
+  }
+}
+.howto li img {
+  width: 5.5em;
+}
+.howto li .caption {
+  margin-left: 1.2em;
+}
+
+.howto li .title {
+  font-size: 150%;
+}
+
+.howto li strong {
+  font-family: "Intro", sans-serif;
+  text-transform: uppercase;
+}
+
+.howto li .caption p {
+  color: gray;
+}
+
+/*
+########  ####  ######  ##     ## ########  ######  
+##     ##  ##  ##    ## ##     ## ##       ##    ## 
+##     ##  ##  ##       ##     ## ##       ##       
+##     ##  ##   ######  ######### ######    ######  
+##     ##  ##        ## ##     ## ##             ## 
+##     ##  ##  ##    ## ##     ## ##       ##    ## 
+########  ####  ######  ##     ## ########  ######  
+*/
+
+.dishes {
+  /* some shared styles with .howto: cf. .howto */
+}
+@media (min-width: 900px) {
+  .dishes {
+    padding-bottom: 3em;
+  }
+}
+
+.dishes .card:nth-of-type(n + 4) {
+  display: none;
+}
+@media (min-width: 900px) {
+  .dishes .card:nth-of-type(n + 4) {
+    display: initial;
+  }
+}
+
+/*
+######## ########    ###    ######## ##     ## ########  ########  ######  
+##       ##         ## ##      ##    ##     ## ##     ## ##       ##    ## 
+##       ##        ##   ##     ##    ##     ## ##     ## ##       ##       
+######   ######   ##     ##    ##    ##     ## ########  ######    ######  
+##       ##       #########    ##    ##     ## ##   ##   ##             ## 
+##       ##       ##     ##    ##    ##     ## ##    ##  ##       ##    ## 
+##       ######## ##     ##    ##     #######  ##     ## ########  ######  
+*/
+
+.features {
+  background: #f07142 linear-gradient(180deg, rgba(240, 113, 66, 0) 0%, rgba(237, 72, 81, 1) 100%);
+  color: white;
+}
+@media (min-width: 900px) {
+  .features {
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+}
+
+.features ul {
+  padding-left: 0;
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+@media (min-width: 900px) {
+  .features ul {
+    flex-wrap: initial;
+  }
+}
+
+.features li {
+  width: 50%;
+  padding: 1em;
+
+  text-align: center;
+}
+@media (min-width: 900px) {
+  .features li {
+    width: initial;
+    flex: 1;
+  }
+}
+
+.features li .bubble {
+  display: inline-block;
+  background: white;
+  border-radius: 1000px;
+  padding: 1.2em;
+}
+
+.features li .bubble img {
+  display: block;
+  width: 4em;
+}
+
+.features li strong {
+  display: block;
+  font-family: "Intro", sans-serif;
+  font-size: 150%;
+  line-height: 1.2;
+  text-transform: uppercase;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.features li p {
+  line-height: 1.2;
+}
+
+/*
+ ######  ##     ## ####  ######  #### ##    ## ######## 
+##    ## ##     ##  ##  ##    ##  ##  ###   ## ##       
+##       ##     ##  ##  ##        ##  ####  ## ##       
+##       ##     ##  ##   ######   ##  ## ## ## ######   
+##       ##     ##  ##        ##  ##  ##  #### ##       
+##    ## ##     ##  ##  ##    ##  ##  ##   ### ##       
+ ######   #######  ####  ######  #### ##    ## ######## 
+*/
+
+.cuisine {
+  /* some shared styles with .howto: cf. .howto */
+}
+@media (min-width: 900px) {
+  .cuisine {
+    padding-bottom: 3em;
+  }
+}
+
+.cuisine .card:nth-of-type(n + 4) {
+  display: none;
+}
+@media (min-width: 900px) {
+  .cuisine .card:nth-of-type(n + 4) {
+    display: initial;
+  }
+}
+
+/*
+   ###    ########   ######  
+  ## ##   ##     ## ##    ## 
+ ##   ##  ##     ## ##       
+##     ## ##     ##  ######  
+######### ##     ##       ## 
+##     ## ##     ## ##    ## 
+##     ## ########   ######  
+*/
+
+.ads {
+  /* some shared styles with .howto: cf. .howto */
+}
+
+.ads figure {
+  margin: 0;
+
+  background: #292931;
+  color: white;
+  text-align: center;
+
+  font-family: "Intro", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  font-size: 200%;
+  line-height: 1.2;
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+
+  border-radius: 0.5rem;
+}
+
+/*
+##     ## ####  ######   ##     ## ##       ####  ######   ##     ## ######## ######## ########  
+##     ##  ##  ##    ##  ##     ## ##        ##  ##    ##  ##     ##    ##    ##       ##     ## 
+##     ##  ##  ##        ##     ## ##        ##  ##        ##     ##    ##    ##       ##     ## 
+#########  ##  ##   #### ######### ##        ##  ##   #### #########    ##    ######   ##     ## 
+##     ##  ##  ##    ##  ##     ## ##        ##  ##    ##  ##     ##    ##    ##       ##     ## 
+##     ##  ##  ##    ##  ##     ## ##        ##  ##    ##  ##     ##    ##    ##       ##     ## 
+##     ## ####  ######   ##     ## ######## ####  ######   ##     ##    ##    ######## ########  
+*/
+
+.highlighted {
+  /* some shared styles with .howto: cf. .howto */
+}
+
+.highlighted .card .desc {
+  margin-top: 1em;
+}
+
+.highlighted .card:nth-of-type(n + 3) {
+  display: none;
+}
+@media (min-width: 900px) {
+  .highlighted .card:nth-of-type(n + 3) {
+    display: initial;
+  }
+}
+
+/*
+########  #######   #######  ######## ######## ########  
+##       ##     ## ##     ##    ##    ##       ##     ## 
+##       ##     ## ##     ##    ##    ##       ##     ## 
+######   ##     ## ##     ##    ##    ######   ########  
+##       ##     ## ##     ##    ##    ##       ##   ##   
+##       ##     ## ##     ##    ##    ##       ##    ##  
+##        #######   #######     ##    ######## ##     ## 
+*/
+
+.footer {
+  /* some shared styles with .howto: cf. .howto */
+
+  background: white;
+
+  padding-bottom: var(--pad);
+}
+@media (min-width: 900px) {
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer > div {
+    width: calc(25% - 3 * var(--gutter) / 4);
+  }
+}
+
+.footer h3 {
+  margin-top: 2em;
+}
+
+.footer a {
+  display: block;
+  color: gray;
+  line-height: 2;
+}
+
+address {
+  font-style: inherit;
+
+  padding: 1em var(--pad);
+}
+@media (min-width: 900px) {
+  address {
+    display: flex;
+  }
+  p {
+    margin-right: auto;
+    margin-bottom: 0;
+  }
+}
+
+address p {
+  margin-top: 0;
+}
+
+address a {
+  margin-right: 2em;
+}
